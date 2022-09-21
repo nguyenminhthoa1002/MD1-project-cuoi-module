@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="Users.js"></script>
+</head>
+<body>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                                <form class="mx-1 mx-md-4">
+
+                                    <!--NAME-->
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input oninput="checkValidateName()" type="text" class="form-control"
+                                                   id="name"/>
+                                            <label id="validate_name" class="form-label">Your Name</label>
+                                        </div>
+                                    </div>
+
+                                    <!--USERNAME-->
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input oninput="checkValidateUsername()" type="text" class="form-control"
+                                                   id="username"/>
+                                            <label class="form-label" id="validate_username">Your Username</label>
+                                            <label class="form-label" id="validate_username_check"></label>
+                                        </div>
+                                    </div>
+
+                                    <!--EMAIL-->
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input oninput="checkValidateEmail()" type="email" class="form-control"
+                                                   id="email"/>
+                                            <label class="form-label" id="validate_email">Your Email</label>
+                                            <label class="form-label" id="validate_email_check"></label>
+                                        </div>
+                                    </div>
+
+                                    <!--PASSWORD-->
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input oninput="checkValidatePassword()" type="password" class="form-control"
+                                                   id="password"/>
+                                            <label class="form-label" id="validate_password">Password</label>
+                                        </div>
+                                    </div>
+
+                                    <!--REPEAT PASSWORD-->
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input oninput="checkValidateConfirmPassword()" type="password" class="form-control"
+                                                   id="confirm_password"/>
+                                            <label class="form-label" id="validate_repeat_password">Repeat your
+                                                password</label>
+                                            <label class="form-label" id="validate_repeat_password_check"></label>
+                                        </div>
+                                    </div>
+
+
+                                    <!--REGISTER BUTTON-->
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="register()"
+                                                id="disabled">Register
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                     class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+
+<script>
+    let id;
+    let name;
+    let username;
+    let email;
+    let password;
+    let confirmPassword;
+    let listUsers;
+    let getListUsers;
+
+    let checkName = false;
+    let checkUsername = false;
+    let checkEmail = false;
+    let checkPassword = false;
+    let checkConfirmPassword = false;
+    let checkPasswordAndConfirmPassword = false;
+
+    function checkValidateName() {
+        name = document.getElementById('name').value;
+        if (name.trim() !== '') {
+            document.getElementById('validate_name').innerHTML = '';
+            document.getElementById('disabled').disabled = false;
+            checkName = true
+        } else {
+            document.getElementById('validate_name').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkName = false;
+        }
+    }
+
+    function checkValidateUsername() {
+        username = document.getElementById('username').value;
+        if (username.trim() !== '') {
+            document.getElementById('validate_username').innerHTML = '';
+            document.getElementById('disabled').disabled = false;
+            checkUsername = true;
+        } else {
+            document.getElementById('validate_username').innerHTML = '<label style="color: red">The username is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkUsername = false;
+        }
+
+        // CHECK TRUNG USERNAME
+        getListUsers= JSON.parse(window.localStorage.getItem('list_users'))
+        for (let i = 0; i < getListUsers.length; i++) {
+            if (username==getListUsers[i].username) {
+                document.getElementById('validate_username').innerHTML = '<label style="color: red">The username is existed! Please try again!</label>'
+                document.getElementById('disabled').disabled = true;
+            }
+        }
+    }
+
+    function checkValidateEmail() {
+        email = document.getElementById('email').value;
+        if (email.trim() !== '') {
+            document.getElementById('validate_email').innerHTML = '';
+            document.getElementById('disabled').disabled = false;
+            checkEmail = true;
+        } else {
+            document.getElementById('validate_email').innerHTML = '<label style="color: red">The email is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkEmail = false;
+        }
+
+        // CHECK TRUNG EMAIL
+        for (let i = 0; i < getListUsers.length; i++) {
+            if (email==getListUsers[i].email) {
+                document.getElementById('validate_email').innerHTML = '<label style="color: red">The email is existed! Please try again!</label>'
+                document.getElementById('disabled').disabled = true;
+            }
+        }
+    }
+
+    function checkValidatePassword() {
+        password = document.getElementById('password').value;
+        if (password.trim() !== '') {
+            document.getElementById('validate_password').innerHTML = '';
+            document.getElementById('disabled').disabled = false;
+            checkPassword = true;
+        } else {
+            document.getElementById('validate_password').innerHTML = '<label style="color: red">The password is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkPassword = false;
+        }
+    }
+
+    function checkValidateConfirmPassword() {
+        confirmPassword = document.getElementById('confirm_password').value;
+        if (confirmPassword.trim() !== '') {
+            document.getElementById('validate_repeat_password').innerHTML = '';
+            document.getElementById('disabled').disabled = false;
+            checkConfirmPassword = true;
+        } else {
+            document.getElementById('validate_repeat_password').innerHTML = '<label style="color: red">The repeat password is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkConfirmPassword = false;
+        }
+
+        if (password == confirmPassword) {
+            document.getElementById('validate_repeat_password_check').innerHTML = ''
+            checkPasswordAndConfirmPassword = true;
+            document.getElementById('disabled').disabled = false;
+        } else {
+            document.getElementById('validate_repeat_password_check').innerHTML = '<label style="color: red">The password is not match! Please try again!</label>'
+            checkPasswordAndConfirmPassword = false;
+            document.getElementById('disabled').disabled = true;
+        }
+    }
+
+    function register() {
+        if (checkName && checkUsername && checkEmail && checkPassword && checkConfirmPassword) {
+            if (listUsers == null) {
+                listUsers = [];
+                id = 1;
+            } else {
+                listUsers = JSON.parse(window.localStorage.getItem('list_users'));
+                id = (listUsers[listUsers.length - 1].id) + 1;
+            }
+            let user = new Users(id, name, username, email, password);
+            listUsers.push(user);
+            window.localStorage.removeItem('list_users');
+            window.localStorage.setItem('list_users', JSON.stringify(listUsers));
+        } window.location.href='sign_in.html';
+    }
+
+</script>
+</html>

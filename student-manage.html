@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="Student.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        tr {
+            text-align: center;
+        }
+
+        button {
+            border-radius: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="homecss.css">
+</head>
+<body>
+<!--Navbar-->
+<div class="header-inner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div style="width: 15%">
+            <img src="image/logo.png" style="width: 150px; height: 50px;margin-left: 20px">
+        </div>
+
+        <div style="width: 65%" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" >
+                <li class="nav-item active" >
+                    <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-card-text"></i> Lộ trình</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bi bi-book"></i> Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"><i class="bi bi-laptop"></i>  JLPT N3</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-laptop"></i>  JLPT N2</a>
+                        <a class="dropdown-item" href="#"><i class="bi bi-laptop"></i>  JLPT N1</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><i class="bi bi-chat-dots"></i> Kaiwa</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="student-manage.html"><i class="bi bi-bezier"></i> Bảng quản lý</a>
+                </li>
+            </ul>
+        </div>
+        <div style="width: 20%">
+            <form class="form-inline my-2 my-lg-0">
+                <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336">Đăng ký</button>
+                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336">Đăng nhập</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<!--End Navbar-->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="alert alert-primary" style="text-align: center">Student Manage</h1>
+            <label id="validate"></label> <br> <br>
+
+            <div class="input-group mb-3">
+                <input id="newName" type="text" class="form-control"
+                       placeholder="Please input the new student's name to create" aria-label="Recipient's username"
+                       aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="bi bi-plus-square"></i></span>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input id="newAddress" type="text" class="form-control"
+                       placeholder="Please input the new student's address to create" aria-label="Recipient's username"
+                       aria-describedby="basic-addon2">
+                <div class="input-group-append" onclick="">
+                    <span class="input-group-text"><i class="bi bi-plus-square"></i></span>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input id="newAge" type="text" class="form-control"
+                       placeholder="Please input the new student's age to create" aria-label="Recipient's username"
+                       aria-describedby="basic-addon2">
+                <div class="input-group-append" onclick="">
+                    <span class="input-group-text"><i class="bi bi-plus-square"></i></span>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="createStudent()">Create</button>
+            </div>
+            <br>
+
+
+            <div class="input-group mb-3">
+                <input id="searchs" type="text" class="form-control" placeholder="Please input name to search student"
+                       aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="actionSearch()">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                </div>
+            </div>
+
+
+            <table class="table" border="1" style="width: 100%; border-collapse: collapse" ;>
+                <tr class="table-danger">
+                    <th>STT</th>
+                    <th>NAME</th>
+                    <th>ADDRESS</th>
+                    <TH>AGE</TH>
+                    <th>EDIT</th>
+                    <th>DELETE</th>
+                </tr>
+                <tbody id="drawTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    let student1 = new Student(1, 'Thoa', 'Hà Nội', '23');
+    let student2 = new Student(2, 'Mai', 'Thanh Hóa', '18');
+    let student3 = new Student(3,'Hương','Mê Linh','20');
+    let student4 = new Student(4,'Linh','Hà Nội','21');
+    let student5 = new Student(5,'Milo','Ninh Bình','23');
+    let student6 = new Student(6,'Trang','Hà Nội','25');
+    let student7 = new Student(7,'Vân','Sóc Sơn','24');
+
+    let studentList = [];
+    studentList.push(student1, student2, student3, student4, student5, student6, student7);
+    let idUpdate;
+
+    function showListStudent() {
+        let drawTable = '';
+        let class_tr = '';
+        for (let i = 0; i < studentList.length; i++) {
+            if (i % 2 == 0) {
+                class_tr = "table-info"
+            } else {
+                class_tr = "table-warning"
+            }
+            drawTable += `<tr class="${class_tr}">
+                            <td>${i+1}</td>
+                            <td>${studentList[i].name}</td>
+                            <td>${studentList[i].address}</td>
+                            <td>${studentList[i].age}</td>
+                            <td><button class="btn btn-primary" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal"
+                            data-whatever="${studentList[i].id}" onclick="showUpdate(${studentList[i].id})"><i class="bi bi-pencil-square"></i></button></td>
+                            <td><button class="btn btn-danger" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal1"
+                            data-whatever="${studentList[i].id}" onclick="showUpdate(${studentList[i].id})"><i class="bi bi-trash" ></i></button></td>
+                            </tr>
+                           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> <br>
+
+      </div>
+      <div class="modal-body">
+      <span id="edit_required"></span>
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" oninput="showUpdate()" class="form-control" id="edit_name">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Address:</label>
+            <input type="text" oninput="showUpdate()" class="form-control" id="edit_address">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Age:</label>
+            <input type="text" oninput="showUpdate()" class="form-control" id="edit_age">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="disabled" class="btn btn-primary" disabled="false" data-dismiss="modal" onclick="updateStudent()">Edit student</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> <br>
+
+  </div>
+      <div class="modal-body">
+      <span id="edit_required"></span>
+        <form>
+          <div class="form-group">
+            <input type="text"  class="form-control" >
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger"  data-dismiss="modal" onclick="deleteStudent()">Delete student</button>
+      </div>
+    </div>
+  </div>
+</div>    `
+
+        }
+        document.getElementById('drawTable').innerHTML = drawTable
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('whatever')
+            idUpdate = recipient
+             console.log('idUpdate ===', recipient)
+            var modal = $(this)
+            modal.find('.modal-title').text('Edit student ' + studentList[idUpdate - 1].getName())
+        })
+
+
+        $('#exampleModal1').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('whatever')
+            idUpdate = recipient
+            console.log('idUpdate ===', recipient)
+            var modal = $(this)
+            modal.find('.modal-title').text('Delete student ' + studentList[idUpdate - 1].getName())
+            modal.find('.modal-body input').val('Are you sure to delete ' + studentList[idUpdate - 1].getName() +'?')
+        })
+    }
+
+    showListStudent();
+
+    function createStudent() {
+
+        let newId = studentList[studentList.length - 1].getId() + 1;
+        let newName = document.getElementById('newName').value;
+        let newAddress = document.getElementById('newAddress').value;
+        let newAge = document.getElementById('newAge').value;
+        let newStudent = new Student(newId, newName, newAddress, newAge);
+
+        if (newName.trim() === '') {
+            document.getElementById('validate').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
+        } else if (newAddress.trim() === '') {
+            document.getElementById('validate').innerHTML = '<label style="color: red">The address is required! Please try again!</label>'
+        } else if (newAge.trim() === '') {
+            document.getElementById('validate').innerHTML = '<label style="color: red">The age is required! Please try again!</label>'
+        } else {
+            studentList.push(newStudent);
+            showListStudent();
+            document.getElementById('validate').innerHTML = '<label style="color: blue">Create Success!</label>'
+        }
+    }
+
+var a='';
+    function showUpdate(id) {
+
+        console.log("id11111111",id)
+        a=id
+        //console.log("studentList",studentList)
+        for (let i = 0; i < studentList.length; i++) {
+            if (studentList[i].getId() === id) {
+
+                document.getElementById('edit_name').value = studentList[i].getName();
+                document.getElementById('edit_address').value = studentList[i].getAddress();
+                document.getElementById('edit_age').value = studentList[i].getAge();
+
+            }
+            if (document.getElementById('edit_name').value.trim() === '') {
+                document.getElementById('edit_required').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
+
+            }
+            if (document.getElementById('edit_address').value.trim() === '') {
+                document.getElementById('edit_required').innerHTML = '<label style="color: red">The address is required! Please try again!</label>'
+
+            }
+            if (document.getElementById('edit_age').value.trim() === '') {
+                document.getElementById('edit_required').innerHTML = '<label style="color: red">The age is required! Please try again!</label>'
+
+            }
+
+            for (let j = 0; j < studentList.length; j++) {
+                if (document.getElementById('edit_name').value === studentList[j].getName() && document.getElementById('edit_address').value === studentList[j].getAddress() && document.getElementById('edit_age').value == studentList[j].getAge()) {
+                    document.getElementById('edit_required').innerHTML = '<label style="color: red">The student is existed! Please try again!</label>'
+                    document.getElementById('disabled').disabled=true;
+                    break;
+                 } else if(document.getElementById('edit_name').value !== studentList[j].getName() || document.getElementById('edit_address').value !== studentList[j].getAddress() || document.getElementById('edit_age').value !== studentList[j].getAge()){
+                     document.getElementById('edit_required').innerHTML = ''
+                    document.getElementById('disabled').disabled=false;
+                }
+            }
+
+        }
+    }
+
+
+    function updateStudent() {
+        console.log("aaa",a)
+        for (let i = 0; i < studentList.length; i++) {
+            if (studentList[i].getId() == idUpdate) {
+                studentList[i].setName(document.getElementById('edit_name').value)
+                studentList[i].setAddress(document.getElementById('edit_address').value)
+                studentList[i].setAge(document.getElementById('edit_age').value)
+                document.getElementById('validate').innerHTML = '<label style="color: blue">Edit Success!</label>'
+            }
+        }
+        showListStudent();
+    }
+
+    function deleteStudent() {
+
+        for (let i = 0; i < studentList.length; i++) {
+            if (studentList[i].getId()==a) {
+                studentList.splice(i, 1)
+                document.getElementById('validate').innerHTML = '<label style="color: blue">Delete Success!</label>'
+                showListStudent();
+                return;
+            } else {
+                document.getElementById('validate').innerHTML = '<label style="color: red">Not delete!</label>'
+            }
+        }
+        showListStudent();
+    }
+
+
+
+    let listStudentSearch = [];
+
+    function actionSearch() {
+        listStudentSearch = []
+        let inputSearch = document.getElementById('searchs').value;
+
+        console.log('Input search==================',inputSearch)
+        if (inputSearch.trim() === '') {
+            showListStudent();
+            return;
+        } else {
+            for (let i = 0; i < studentList.length; i++) {
+                console.log('i===============', i)
+                console.log('student[i]', studentList[i].getAddress())
+                if (
+                    studentList[i].name.toLowerCase().search(inputSearch.toLowerCase()) !== -1
+                    ||
+                    studentList[i].getAddress().search(inputSearch) !== -1
+                    ||
+                    studentList[i].age.toLowerCase().search(inputSearch.toLowerCase()) !== -1
+                ) {
+                    listStudentSearch.push(studentList[i])
+
+                }
+
+            }
+            showListSearch();
+        }
+
+    }
+
+    function showListSearch() {
+        let drawTable = '';
+        for (let i = 0; i < listStudentSearch.length; i++) {
+            drawTable += `<tr>
+                            <td>${i+1}</td>
+                            <td>${listStudentSearch[i].name}</td>
+                            <td>${listStudentSearch[i].address}</td>
+                            <td>${listStudentSearch[i].age}</td>
+                            <td><button class="btn btn-primary" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal"
+                            data-whatever="${studentList[i].id}" onclick="showUpdate(${listStudentSearch[i].id})"><i class="bi bi-pencil-square"></i></button></td>
+                            <td><button class="btn btn-danger" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal1" onclick="showUpdate(${listStudentSearch[i].id})"><i class="bi bi-trash" ></i></button></td>
+                           </tr>`
+        }
+        document.getElementById('drawTable').innerHTML = drawTable
+    }
+
+    showListStudent();
+
+
+</script>
+
+</body>
+</html>
