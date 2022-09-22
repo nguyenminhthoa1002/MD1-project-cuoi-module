@@ -65,8 +65,32 @@
                 <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336; display: none" >Đăng ký</button>
                 <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336;display: none">Đăng nhập</button>
                 <label><i class="bi bi-person-circle" style="margin-left: 100px; margin-right: 30px"></i></label>
-                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336" onclick="signOut()">Đăng xuất
-                </button>
+<!--                <button type="button" class="btn btn-primary" data-toggle="modal" style="background-color: #41A336" data-target="#exampleModal2" data-whatever="@mdo">Đăng xuất</button>-->
+                <button type="button" style="background-color: #41A336" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Đăng xuất</button>
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Are you sure to sign out?</label>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="signOut()">Sign out</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </nav>
@@ -139,6 +163,15 @@
 </div>
 
 <script>
+    $('#exampleModal2').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('whatever')
+        var modal = $(this)
+        modal.find('.modal-title').text('Sign out')
+        modal.find('.modal-body input').val(recipient)
+    })
+
+
     let student1 = new Student(1, 'Thoa', 'Hà Nội', '23');
     let student2 = new Student(2, 'Mai', 'Thanh Hóa', '18');
     let student3 = new Student(3,'Hương','Mê Linh','20');
