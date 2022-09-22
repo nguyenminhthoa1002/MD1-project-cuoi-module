@@ -36,8 +36,8 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input oninput="checkValidateUsername()" type="text" class="form-control"
-                                                   id="signin_username"/>
+                                            <input type="text" class="form-control"
+                                                   id="signInUsername"/>
                                             <label class="form-label" id="validate_username">Your Username</label>
                                             <label class="form-label" id="validate_username_check"></label>
                                         </div>
@@ -47,10 +47,10 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input oninput="checkValidatePassword()" type="password"
+                                            <input  type="password"
                                                    class="form-control"
-                                                   id="signin_password"/>
-                                            <label class="form-label" id="validate_password">Password</label>
+                                                   id="signInPassword"/>
+                                            <label class="form-label" id="validate_signIn">Password</label>
                                         </div>
                                     </div>
 
@@ -83,7 +83,20 @@
     let sign_in_username;
     let sign_in_password;
     function signIn(){
-        sign_in_username = document.getElementById('signin_username').value;
+        sign_in_username = document.getElementById('signInUsername').value;
+        sign_in_password = document.getElementById('signInPassword').value;
+        getListUsers= JSON.parse(window.localStorage.getItem('list_users'))
+        if (getListUsers!== null){
+            for (let i = 0; i < getListUsers.length; i++) {
+                if (sign_in_username==getListUsers[i].username && sign_in_password==getListUsers[i].password) {
+                    document.getElementById('disabled').disabled = false;
+                    window.location.href = 'after-sign-in.html';
+                } else {
+                    document.getElementById('validate_signIn').innerHTML = '<label style="color: red">The username or the password is not right! Please try again!</label>'
+                    document.getElementById('disabled').disabled = true;
+                }
 
+            }
+        }
     }
 </script>
