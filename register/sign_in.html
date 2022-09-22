@@ -36,9 +36,9 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control" oninput="checkValidateUsernameSignIn()"
                                                    id="signInUsername"/>
-                                            <label class="form-label" id="validate_username">Your Username</label>
+                                            <label  class="form-label" id="validate_username_signIn">Your Username</label>
                                             <label class="form-label" id="validate_username_check"></label>
                                         </div>
                                     </div>
@@ -47,10 +47,11 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input  type="password"
+                                            <input  type="password" oninput="checkValidatePasswordSignIn()"
                                                    class="form-control"
                                                    id="signInPassword"/>
-                                            <label class="form-label" id="validate_signIn">Password</label>
+                                            <label  class="form-label" id="validate_password_signIn">Password</label>
+                                            <label class="form-label" id="validate_password_check"></label>
                                         </div>
                                     </div>
 
@@ -82,20 +83,48 @@
 <script>
     let sign_in_username;
     let sign_in_password;
-    function signIn(){
+
+    let checkUsernameSignIn = false;
+    let checkPasswordSignIn = false;
+
+    function checkValidateUsernameSignIn() {
         sign_in_username = document.getElementById('signInUsername').value;
+        if (sign_in_username.trim() !== '') {
+            document.getElementById('validate_username_check').innerHTML =''
+            document.getElementById('disabled').disabled = false;
+            checkUsernameSignIn = true;
+        } else {
+            document.getElementById('validate_username_check').innerHTML = '<label style="color: red">The username is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkUsernameSignIn = false;
+        }
+    }
+
+    function checkValidatePasswordSignIn() {
         sign_in_password = document.getElementById('signInPassword').value;
+        if (sign_in_password.trim() !== '') {
+            document.getElementById('validate_password_check').innerHTML = '';
+            document.getElementById('disabled').disabled = false;
+            checkPasswordSignIn = true;
+        } else {
+            document.getElementById('validate_password_check').innerHTML = '<label style="color: red">The username is required! Please try again!</label>'
+            document.getElementById('disabled').disabled = true;
+            checkPasswordSignIn = false;
+        }
+    }
+
+    function signIn(){
         getListUsers= JSON.parse(window.localStorage.getItem('list_users'))
-        if (getListUsers!== null){
+        if (checkUsernameSignIn && checkPasswordSignIn) {
             for (let i = 0; i < getListUsers.length; i++) {
-                if (sign_in_username==getListUsers[i].username && sign_in_password==getListUsers[i].password) {
+                if (sign_in_username==getListUsers[i].username && sign_in_password==getListUsers[i].password){
+                    document.getElementById('validate_password_check').innerHTML = '';
                     document.getElementById('disabled').disabled = false;
-                    window.location.href = 'after-sign-in.html';
+                    window.location.href = 'after-sign-in.html'
                 } else {
-                    document.getElementById('validate_signIn').innerHTML = '<label style="color: red">The username or the password is not right! Please try again!</label>'
+                    document.getElementById('validate_password_check').innerHTML = '<label style="color: red">The username or the password is not correct! Please try again!</label>';
                     document.getElementById('disabled').disabled = true;
                 }
-
             }
         }
     }
