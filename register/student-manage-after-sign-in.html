@@ -12,7 +12,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="register/Student.js"></script>
+<script src="Student.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -25,20 +25,20 @@
             border-radius: 20px;
         }
     </style>
-    <link rel="stylesheet" href="homecss.css">
+    <link rel="stylesheet" href="../homecss.css">
 </head>
 <body>
 <!--Navbar-->
 <div class="header-inner">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div style="width: 15%">
-            <img src="image/logo.png" style="width: 150px; height: 50px;margin-left: 20px">
+            <img src="../image/logo.png" style="width: 150px; height: 50px;margin-left: 20px">
         </div>
 
         <div style="width: 65%" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto" >
                 <li class="nav-item active" >
-                    <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Trang chủ <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../index.html"><i class="bi bi-house"></i> Trang chủ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-card-text"></i> Lộ trình</a>
@@ -56,16 +56,15 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="student-manage.html"><i class="bi bi-bezier"></i> Bảng quản lý</a>
+                    <a class="nav-link" href="../student-manage.html"><i class="bi bi-bezier"></i> Bảng quản lý</a>
                 </li>
             </ul>
         </div>
         <div style="width: 20%">
             <form class="form-inline my-2 my-lg-0">
-<!--                <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336">Đăng ký</button>-->
-<!--                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336">Đăng nhập</button>-->
-                <a href="register/register.html"><button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336">Đăng ký</button></a>
-                <a href="register/sign_in.html"><button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336">Đăng nhập</button></a>
+                <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336; display: none" >Đăng ký</button>
+                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336;display: none">Đăng nhập</button>
+                <label><i class="bi bi-person-circle" style="margin-left: 100px"></i></label>
             </form>
         </div>
     </nav>
@@ -128,8 +127,8 @@
                     <th>NAME</th>
                     <th>ADDRESS</th>
                     <TH>AGE</TH>
-                    <th style="display: none">EDIT</th>
-                    <th style="display: none">DELETE</th>
+                    <th>EDIT</th>
+                    <th>DELETE</th>
                 </tr>
                 <tbody id="drawTable"></tbody>
             </table>
@@ -164,9 +163,9 @@
                             <td>${studentList[i].name}</td>
                             <td>${studentList[i].address}</td>
                             <td>${studentList[i].age}</td>
-                            <td style="display: none"><button class="btn btn-primary" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal"
+                            <td><button class="btn btn-primary" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal"
                             data-whatever="${studentList[i].id}" onclick="showUpdate(${studentList[i].id})"><i class="bi bi-pencil-square"></i></button></td>
-                            <td style="display: none"><button class="btn btn-danger" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal1"
+                            <td><button class="btn btn-danger" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal1"
                             data-whatever="${studentList[i].id}" onclick="showUpdate(${studentList[i].id})"><i class="bi bi-trash" ></i></button></td>
                             </tr>
                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -239,7 +238,7 @@
             var button = $(event.relatedTarget)
             var recipient = button.data('whatever')
             idUpdate = recipient
-             console.log('idUpdate ===', recipient)
+            console.log('idUpdate ===', recipient)
             var modal = $(this)
             modal.find('.modal-title').text('Edit student ' + studentList[idUpdate - 1].getName())
         })
@@ -279,7 +278,7 @@
         }
     }
 
-var a='';
+    var a='';
     function showUpdate(id) {
 
         console.log("id11111111",id)
@@ -311,8 +310,8 @@ var a='';
                     document.getElementById('edit_required').innerHTML = '<label style="color: red">The student is existed! Please try again!</label>'
                     document.getElementById('disabled').disabled=true;
                     break;
-                 } else if(document.getElementById('edit_name').value !== studentList[j].getName() || document.getElementById('edit_address').value !== studentList[j].getAddress() || document.getElementById('edit_age').value !== studentList[j].getAge()){
-                     document.getElementById('edit_required').innerHTML = ''
+                } else if(document.getElementById('edit_name').value !== studentList[j].getName() || document.getElementById('edit_address').value !== studentList[j].getAddress() || document.getElementById('edit_age').value !== studentList[j].getAge()){
+                    document.getElementById('edit_required').innerHTML = ''
                     document.getElementById('disabled').disabled=false;
                 }
             }

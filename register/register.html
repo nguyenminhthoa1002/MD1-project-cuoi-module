@@ -16,6 +16,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="Users.js"></script>
+    <link rel="stylesheet" href="../homecss.css">
 </head>
 <body>
 <section class="vh-100" style="background-color: #eee;">
@@ -156,16 +157,19 @@
 
         // CHECK TRUNG USERNAME
         getListUsers= JSON.parse(window.localStorage.getItem('list_users'))
-        for (let i = 0; i < getListUsers.length; i++) {
-            if (username==getListUsers[i].username) {
-                document.getElementById('validate_username').innerHTML = '<label style="color: red">The username is existed! Please try again!</label>'
-                document.getElementById('disabled').disabled = true;
+        if (getListUsers!== null){
+            for (let i = 0; i < getListUsers.length; i++) {
+                if (username==getListUsers[i].username) {
+                    document.getElementById('validate_username').innerHTML = '<label style="color: red">The username is existed! Please try again!</label>'
+                    document.getElementById('disabled').disabled = true;
+                }
             }
         }
     }
 
     function checkValidateEmail() {
         email = document.getElementById('email').value;
+
         if (email.trim() !== '') {
             document.getElementById('validate_email').innerHTML = '';
             document.getElementById('disabled').disabled = false;
@@ -177,10 +181,12 @@
         }
 
         // CHECK TRUNG EMAIL
-        for (let i = 0; i < getListUsers.length; i++) {
-            if (email==getListUsers[i].email) {
-                document.getElementById('validate_email').innerHTML = '<label style="color: red">The email is existed! Please try again!</label>'
-                document.getElementById('disabled').disabled = true;
+        if (getListUsers!== null) {
+            for (let i = 0; i < getListUsers.length; i++) {
+                if (email==getListUsers[i].email) {
+                    document.getElementById('validate_email').innerHTML = '<label style="color: red">The email is existed! Please try again!</label>'
+                    document.getElementById('disabled').disabled = true;
+                }
             }
         }
     }
@@ -221,6 +227,9 @@
         }
     }
 
+
+
+
     function register() {
         if (checkName && checkUsername && checkEmail && checkPassword && checkConfirmPassword) {
             if (listUsers == null) {
@@ -228,13 +237,13 @@
                 id = 1;
             } else {
                 listUsers = JSON.parse(window.localStorage.getItem('list_users'));
-                id = (listUsers[listUsers.length - 1].id) + 1;
+                id = (listUsers[listUsers.length-1].id) + 1;
             }
             let user = new Users(id, name, username, email, password);
             listUsers.push(user);
-            window.localStorage.removeItem('list_users');
             window.localStorage.setItem('list_users', JSON.stringify(listUsers));
-        } window.location.href='sign_in.html';
+            window.location.href='after-sign-in.html';
+        }
     }
 
 </script>
