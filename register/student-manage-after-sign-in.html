@@ -369,7 +369,7 @@
                 if (
                     studentList[i].name.toLowerCase().search(inputSearch.toLowerCase()) !== -1
                     ||
-                    studentList[i].getAddress().search(inputSearch) !== -1
+                    studentList[i].address.toLowerCase().search(inputSearch.toLowerCase()) !== -1
                     ||
                     studentList[i].age.toLowerCase().search(inputSearch.toLowerCase()) !== -1
                 ) {
