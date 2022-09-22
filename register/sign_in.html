@@ -120,7 +120,7 @@
                 if (sign_in_username==getListUsers[i].username && sign_in_password==getListUsers[i].password){
                     document.getElementById('validate_password_check').innerHTML = '';
                     document.getElementById('disabled').disabled = false;
-                    window.location.href = 'after-sign-in.html'
+                    window.location.href = 'student-manage-after-sign-in.html'
                 } else {
                     document.getElementById('validate_password_check').innerHTML = '<label style="color: red">The username or the password is not correct! Please try again!</label>';
                     document.getElementById('disabled').disabled = true;

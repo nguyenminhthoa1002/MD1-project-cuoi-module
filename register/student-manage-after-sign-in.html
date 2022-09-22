@@ -45,7 +45,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bi bi-book"></i> Dropdown
+                        <i class="bi bi-book"></i> Khóa học
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#"><i class="bi bi-laptop"></i>  JLPT N3</a>
@@ -64,7 +64,9 @@
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336; display: none" >Đăng ký</button>
                 <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336;display: none">Đăng nhập</button>
-                <label><i class="bi bi-person-circle" style="margin-left: 100px"></i></label>
+                <label><i class="bi bi-person-circle" style="margin-left: 100px; margin-right: 30px"></i></label>
+                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336" onclick="signOut()">Đăng xuất
+                </button>
             </form>
         </div>
     </nav>
@@ -400,6 +402,10 @@
     showListStudent();
 
 
+    function signOut(){
+        window.localStorage.removeItem('list_users')
+        window.location.reload();
+    }
 </script>
 
 </body>
