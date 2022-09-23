@@ -15,8 +15,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="Users.js"></script>
-    <link rel="stylesheet" href="../homecss.css">
+    <script src="register/Users.js"></script>
+    <link rel="stylesheet" href="homecss.css">
 </head>
 <body>
 <section class="vh-100" style="background-color: #eee;">
@@ -61,7 +61,8 @@
                                                 id="disabled">Sign in
                                         </button>
                                     </div>
-
+<!--                                    <p>Don't have an account yet?</p>-->
+<!--                                    <a href="register.html"><button>SIGN UP</button></a>-->
                                 </form>
 
                             </div>
@@ -77,7 +78,11 @@
             </div>
         </div>
     </div>
+
+
 </section>
+
+
 </body>
 
 <script>
@@ -120,7 +125,8 @@
                 if (sign_in_username==getListUsers[i].username && sign_in_password==getListUsers[i].password){
                     document.getElementById('validate_password_check').innerHTML = '';
                     document.getElementById('disabled').disabled = false;
-                    window.location.href = 'student-manage-after-sign-in.html'
+                    window.location.href = 'index.html'
+                    window.localStorage.setItem('Username_check',sign_in_username)
                 } else {
                     document.getElementById('validate_password_check').innerHTML = '<label style="color: red">The username or the password is not correct! Please try again!</label>';
                     document.getElementById('disabled').disabled = true;

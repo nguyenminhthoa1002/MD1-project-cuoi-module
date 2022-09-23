@@ -12,7 +12,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="Student.js"></script>
+<script src="register/Student.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -25,20 +25,20 @@
             border-radius: 20px;
         }
     </style>
-    <link rel="stylesheet" href="../homecss.css">
+    <link rel="stylesheet" href="homecss.css">
 </head>
 <body>
 <!--Navbar-->
 <div class="header-inner">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div style="width: 15%">
-            <img src="../image/logo.png" style="width: 150px; height: 50px;margin-left: 20px">
+            <img src="image/logo.png" style="width: 150px; height: 50px;margin-left: 20px">
         </div>
 
         <div style="width: 65%" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto" >
                 <li class="nav-item active" >
-                    <a class="nav-link" href="../index.html"><i class="bi bi-house"></i> Trang chủ <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.html"><i class="bi bi-house"></i> Trang chủ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-card-text"></i> Lộ trình</a>
@@ -62,42 +62,16 @@
         </div>
         <div style="width: 20%">
             <form class="form-inline my-2 my-lg-0">
-                <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336; display: none" >Đăng ký</button>
-                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336;display: none">Đăng nhập</button>
-                <label><i class="bi bi-person-circle" style="margin-left: 100px; margin-right: 30px"></i></label>
-<!--                <button type="button" class="btn btn-primary" data-toggle="modal" style="background-color: #41A336" data-target="#exampleModal2" data-whatever="@mdo">Đăng xuất</button>-->
-                <button type="button" style="background-color: #41A336" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Đăng xuất</button>
-                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Are you sure to sign out?</label>
-                                    </div>
-
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="signOut()">Sign out</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336">Đăng ký</button>-->
+<!--                <button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336">Đăng nhập</button>-->
+                <a id="signUp"><button type="button" class="btn btn-primary btn-lg" style="background-color: #41A336">Đăng ký</button></a>
+                <a id="signIn"><button onclick="logiin()" type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336">Đăng nhập</button></a>
             </form>
         </div>
     </nav>
 </div>
 
 <!--End Navbar-->
-
 
 <div class="container">
     <div class="row">
@@ -153,8 +127,8 @@
                     <th>NAME</th>
                     <th>ADDRESS</th>
                     <TH>AGE</TH>
-                    <th>EDIT</th>
-                    <th>DELETE</th>
+                    <th class="non-edit-and-delete">EDIT</th>
+                    <th class="non-edit-and-delete">DELETE</th>
                 </tr>
                 <tbody id="drawTable"></tbody>
             </table>
@@ -163,15 +137,6 @@
 </div>
 
 <script>
-    $('#exampleModal2').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var recipient = button.data('whatever')
-        var modal = $(this)
-        modal.find('.modal-title').text('Sign out')
-        modal.find('.modal-body input').val(recipient)
-    })
-
-
     let student1 = new Student(1, 'Thoa', 'Hà Nội', '23');
     let student2 = new Student(2, 'Mai', 'Thanh Hóa', '18');
     let student3 = new Student(3,'Hương','Mê Linh','20');
@@ -198,9 +163,9 @@
                             <td>${studentList[i].name}</td>
                             <td>${studentList[i].address}</td>
                             <td>${studentList[i].age}</td>
-                            <td><button class="btn btn-primary" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal"
+                            <td class="non-edit-and-delete"><button class="btn btn-primary" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal"
                             data-whatever="${studentList[i].id}" onclick="showUpdate(${studentList[i].id})"><i class="bi bi-pencil-square"></i></button></td>
-                            <td><button class="btn btn-danger" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal1"
+                            <td class="non-edit-and-delete"><button class="btn btn-danger" style="border-radius: 50%" data-toggle="modal" data-target="#exampleModal1"
                             data-whatever="${studentList[i].id}" onclick="showUpdate(${studentList[i].id})"><i class="bi bi-trash" ></i></button></td>
                             </tr>
                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -273,7 +238,7 @@
             var button = $(event.relatedTarget)
             var recipient = button.data('whatever')
             idUpdate = recipient
-            console.log('idUpdate ===', recipient)
+             console.log('idUpdate ===', recipient)
             var modal = $(this)
             modal.find('.modal-title').text('Edit student ' + studentList[idUpdate - 1].getName())
         })
@@ -288,6 +253,19 @@
             modal.find('.modal-title').text('Delete student ' + studentList[idUpdate - 1].getName())
             modal.find('.modal-body input').val('Are you sure to delete ' + studentList[idUpdate - 1].getName() +'?')
         })
+
+        let userValue = window.localStorage.getItem('Username_check')
+        let button = document.getElementsByClassName('non-edit-and-delete')
+        if (userValue !== null) {
+            document.getElementById('signUp').innerHTML = '<label style="color: black; font-size: 30px; margin-right: 50px"><i class="bi bi-person-circle"></i></label>'
+            document.getElementById('signIn').innerHTML = '<button type="button" class="btn btn-secondary btn-lg" style="background-color: #41A336" onclick="logOutHoanToan()">Đăng xuất' + '</button>'
+        } else {
+            for (let i = 0; i <button.length; i++) {
+                button[i].style.display='none'
+            }
+
+        }
+
     }
 
     showListStudent();
@@ -313,7 +291,7 @@
         }
     }
 
-    var a='';
+var a='';
     function showUpdate(id) {
 
         console.log("id11111111",id)
@@ -345,8 +323,8 @@
                     document.getElementById('edit_required').innerHTML = '<label style="color: red">The student is existed! Please try again!</label>'
                     document.getElementById('disabled').disabled=true;
                     break;
-                } else if(document.getElementById('edit_name').value !== studentList[j].getName() || document.getElementById('edit_address').value !== studentList[j].getAddress() || document.getElementById('edit_age').value !== studentList[j].getAge()){
-                    document.getElementById('edit_required').innerHTML = ''
+                 } else if(document.getElementById('edit_name').value !== studentList[j].getName() || document.getElementById('edit_address').value !== studentList[j].getAddress() || document.getElementById('edit_age').value !== studentList[j].getAge()){
+                     document.getElementById('edit_required').innerHTML = ''
                     document.getElementById('disabled').disabled=false;
                 }
             }
@@ -402,7 +380,7 @@
                 if (
                     studentList[i].name.toLowerCase().search(inputSearch.toLowerCase()) !== -1
                     ||
-                    studentList[i].address.toLowerCase().search(inputSearch.toLowerCase()) !== -1
+                    studentList[i].getAddress().search(inputSearch) !== -1
                     ||
                     studentList[i].age.toLowerCase().search(inputSearch.toLowerCase()) !== -1
                 ) {
@@ -435,8 +413,13 @@
     showListStudent();
 
 
-    function signOut(){
-        window.location.href = 'home.html'
+    function logOutHoanToan(){
+        window.localStorage.removeItem('Username_check')
+        window.location.reload();
+    }
+
+    function logiin() {
+        window.location.href='sign_in.html'
     }
 </script>
 
